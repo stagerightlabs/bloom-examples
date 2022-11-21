@@ -1,0 +1,256 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "c5b444302ef024d3c50365e6277c6f79",
+    "packages": [
+        {
+            "name": "brick/math",
+            "version": "0.9.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/brick/math.git",
+                "reference": "ca57d18f028f84f777b2168cd1911b0dee2343ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/brick/math/zipball/ca57d18f028f84f777b2168cd1911b0dee2343ae",
+                "reference": "ca57d18f028f84f777b2168cd1911b0dee2343ae",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.2",
+                "phpunit/phpunit": "^7.5.15 || ^8.5 || ^9.0",
+                "vimeo/psalm": "4.9.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Brick\\Math\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Arbitrary-precision arithmetic library",
+            "keywords": [
+                "Arbitrary-precision",
+                "BigInteger",
+                "BigRational",
+                "arithmetic",
+                "bigdecimal",
+                "bignum",
+                "brick",
+                "math"
+            ],
+            "support": {
+                "issues": "https://github.com/brick/math/issues",
+                "source": "https://github.com/brick/math/tree/0.9.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/BenMorel",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/brick/math",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-08-15T20:50:18+00:00"
+        },
+        {
+            "name": "myclabs/deep-copy",
+            "version": "1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/myclabs/DeepCopy.git",
+                "reference": "14daed4296fae74d9e3201d2c4925d1acb7aa614"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/14daed4296fae74d9e3201d2c4925d1acb7aa614",
+                "reference": "14daed4296fae74d9e3201d2c4925d1acb7aa614",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "conflict": {
+                "doctrine/collections": "<1.6.8",
+                "doctrine/common": "<2.13.3 || >=3,<3.2.2"
+            },
+            "require-dev": {
+                "doctrine/collections": "^1.6.8",
+                "doctrine/common": "^2.13.3 || ^3.2.2",
+                "phpunit/phpunit": "^7.5.20 || ^8.5.23 || ^9.5.13"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/DeepCopy/deep_copy.php"
+                ],
+                "psr-4": {
+                    "DeepCopy\\": "src/DeepCopy/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Create deep copies (clones) of your objects",
+            "keywords": [
+                "clone",
+                "copy",
+                "duplicate",
+                "object",
+                "object graph"
+            ],
+            "support": {
+                "issues": "https://github.com/myclabs/DeepCopy/issues",
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.11.0"
+            },
+            "funding": [
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/myclabs/deep-copy",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-03-03T13:19:32+00:00"
+        },
+        {
+            "name": "stagerightlabs/bloom",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../Bloom",
+                "reference": "af93acd8ac70c6373e1e66853b10f95e0fc276ed"
+            },
+            "require": {
+                "brick/math": "^0.9.3",
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-sodium": "*",
+                "myclabs/deep-copy": "^1.11",
+                "php-64bit": "^8.0",
+                "stagerightlabs/phpxdr": "^0.0.15"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.3",
+                "phpstan/phpstan": "^1.2",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "StageRightLabs\\Bloom\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "StageRightLabs\\Bloom\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "format": [
+                    "php-cs-fixer fix --config=.php-cs-fixer.dist.php --allow-risky yes"
+                ],
+                "phpstan": [
+                    "phpstan analyze -c phpstan.neon"
+                ]
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Durham",
+                    "email": "ryan@stagerightlabs.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP library for communicating with a Stellar Horizon server.",
+            "homepage": "https://github.com/stagerightlabs/bloom",
+            "keywords": [
+                "horizon",
+                "sdk",
+                "stellar",
+                "xlm"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "stagerightlabs/phpxdr",
+            "version": "0.0.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stagerightlabs/phpxdr.git",
+                "reference": "63f6a18ddca1f334e9866dde8f8880b8724e754e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stagerightlabs/phpxdr/zipball/63f6a18ddca1f334e9866dde8f8880b8724e754e",
+                "reference": "63f6a18ddca1f334e9866dde8f8880b8724e754e",
+                "shasum": ""
+            },
+            "require": {
+                "php-64bit": "^8.0"
+            },
+            "require-dev": {
+                "brick/math": "^0.9.3",
+                "friendsofphp/php-cs-fixer": "^3.2",
+                "phpstan/phpstan": "^1.2",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "StageRightLabs\\PhpXdr\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Durham",
+                    "email": "ryan@stagerightlabs.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Encode and Decode XDR strings with PHP",
+            "homepage": "https://github.com/stagerightlabs/phpxdr",
+            "keywords": [
+                "RFC-4506",
+                "XDR"
+            ],
+            "support": {
+                "issues": "https://github.com/stagerightlabs/phpxdr/issues",
+                "source": "https://github.com/stagerightlabs/phpxdr/tree/0.0.15"
+            },
+            "time": "2022-06-02T04:21:46+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "stagerightlabs/bloom": 20
+    },
+    "prefer-stable": true,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}

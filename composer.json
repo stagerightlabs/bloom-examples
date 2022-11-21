@@ -1,0 +1,32 @@
+{
+    "name": "stagerightlabs/bloom-stellar-quest",
+    "description": "Stellar Quest solutions in PHP using Bloom",
+    "type": "project",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Ryan Durham",
+            "email": "ryan@stagerightlabs.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "stagerightlabs/bloom": "dev-main",
+        "stagerightlabs/phpxdr": "^0.0.15"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "source",
+        "sort-packages": true
+    },
+    "prefer-stable": true,
+    "repositories": {
+        "bloom": {
+            "type": "path",
+            "url": "../Bloom",
+            "options": {
+                "symlink": true
+            }
+        }
+    }
+}
