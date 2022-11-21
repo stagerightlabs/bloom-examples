@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+  php:
+    build:
+      context: docker/php
+    user: www-data
+    command: ["sleep", "9223372036854775807"]
+    volumes:
+      - ./:/var/www:cached
+      - ../Bloom:/var/Bloom:cached
+      - ../phpxdr:/var/phpxdr:cached
