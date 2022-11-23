@@ -28,6 +28,9 @@ if (!$amount) {
     return exit(1);
 }
 
+// Ask the user to provide the signing key for the source account.
+// Without this we won't be able to sign the transaction and
+// it will be rejected when we submit it to the network.
 $seed = IO::prompt('Provide the secret key of the source account to sign the transaction:');
 if (!$seed) {
     IO::error('You must provide a source account secret key for transaction signing.');
@@ -82,14 +85,16 @@ if (IO::confirm('Do you wish to continue?')) {
     // automatically 'de-scale' that into a stroop value. If we 
     // provided an integer it would be interpreted as stroops.
     // 
-    // We are not requied to include the source account here, because 
-    // it is also listed in the transaction itself, but we can.
+    // We are not requied to include the source account with each 
+    // operation because it is also listed in the transaction 
+    // itself. We can still specify it here if we want to.
     $createAccountOp = $bloom->operation->createAccount($destination, $amount, $account);
 
     // Add the CreateAccount operation to the transaction.
-    // Note that all Bloom objects are immutable by default;
-    // The transaction we got back is a new PHP object 
-    // instanct, unrelated to the transaction we provided.
+    // 
+    // Note that all Bloom objects are immutable by default; The 
+    // transaction instance we got back is a new PHP object 
+    // that has its own separate space in memory.
     $transaction = $bloom->transaction->addOperation($transaction, $createAccountOp);
 
     // Wrap the transaction in a transaction envelope to prepare for submission.
