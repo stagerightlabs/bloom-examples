@@ -57,20 +57,57 @@ IO::print(IO::color('Transfer Amount: ', IO::COLOR_BLUE) . $amount . ' XLM');
 IO::print(IO::color('Drawn from:      ', IO::COLOR_BLUE) . $account->getAddress());
 
 if (IO::confirm('Do you wish to continue?')) {
-    // Create the new account by funding it from the source account.
-    $transaction = $bloom->transaction->create($account, $sequenceNumber);
+    
+    // We will now create the new account by funding it from the source account.
+    
+    // First determine the maximum transaction fee we are willing to pay.
+    // We won't necessarily be charged this amount; the network will 
+    // only charge the mininmum required fee based on network traffic.
+    // 
+    // See more here: 
+    // https://developers.stellar.org/docs/encyclopedia/fees-surge-pricing-fee-strategies#network-fees-on-stellar
+    // 
+    // The minimum fee is the base fee (100 stroops) * the number of operations
+    // in our transaction.
+    $fee = 100; // 100 stroops * 1 operation
+
+    // Now we will create the transaction object
+    $transaction = $bloom->transaction->create($account, $account->getCurrentSequenceNumber(), $fee);
+
+    // Prepare a 'create account' operation for inclusion in the transaction.
+    // 
+    // It requries the public address of the account to be created and 
+    // some amount of XLM to transfer to the new account to create it.
+    // We are specifying that amount as a string here; Bloom will 
+    // automatically 'de-scale' that into a stroop value. If we 
+    // provided an integer it would be interpreted as stroops.
+    // 
+    // We are not requied to include the source account here, because 
+    // it is also listed in the transaction itself, but we can.
     $createAccountOp = $bloom->operation->createAccount($destination, $amount, $account);
+
+    // Add the CreateAccount operation to the transaction.
+    // Note that all Bloom objects are immutable by default;
+    // The transaction we got back is a new PHP object 
+    // instanct, unrelated to the transaction we provided.
     $transaction = $bloom->transaction->addOperation($transaction, $createAccountOp);
+
+    // Wrap the transaction in a transaction envelope to prepare for submission.
     $envelope = $bloom->envelope->enclose($transaction);
+
+    // Sign the envelope with the secret key of our key pair.
     $envelope = $bloom->envelope->sign($envelope, $keyPair);
 
     // Submit the transaction envelope to Horizon
     $response = $bloom->envelope->post($envelope);
+
+    // An error response indicates that something went wrong.
     if ($response instanceof HorizonError) {
         IO::error($response->getMessage());
         exit(1);
     }
 
+    // Otherwise we are good to go.
     IO::success("Operation complete.");
     IO::success("https://stellar.expert/explorer/testnet/tx/{$response->getHash()}");
 } else {
