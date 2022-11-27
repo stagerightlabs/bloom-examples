@@ -41,7 +41,7 @@ if (!$seed) {
 $keyPair = $bloom->keypair->fromSeed($seed);
 $account = $bloom->account->retrieve($keyPair);
 if ($account instanceof HorizonError) {
-    IO::error($account->getTitle() . ': ' . $account->getDetail());
+    IO::error("The source account does not appear to be valid. ({$account->getTitle()})");
     exit(1);
 }
 $account = $bloom->account->incrementSequenceNumber($account);
@@ -100,6 +100,8 @@ if (IO::confirm('Do you wish to continue?')) {
     // Wrap the transaction in a transaction envelope to prepare for submission.
     $envelope = $bloom->envelope->enclose($transaction);
 
+    var_dump(\StageRightLabs\PHPXDR\XDR::fresh()->write($envelope)->toBase64());
+
     // Sign the envelope with the secret key of our key pair.
     $envelope = $bloom->envelope->sign($envelope, $keyPair);
 
@@ -108,7 +110,16 @@ if (IO::confirm('Do you wish to continue?')) {
 
     // An error response indicates that something went wrong.
     if ($response instanceof HorizonError) {
-        IO::error($response->getMessage());
+        IO::error($response->getTitle());
+
+        if ($result->getOperationResultList()->isNotEmpty()) {
+            foreach ($result->getOperationResultList() as $operationResult) {
+                IO::error($operationResult->getErrorMessage());
+            }
+        } else {
+            IO::error($result->getErrorMessage());
+        }
+
         exit(1);
     }
 
