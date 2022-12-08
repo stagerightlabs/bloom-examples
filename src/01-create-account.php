@@ -100,8 +100,6 @@ if (IO::confirm('Do you wish to continue?')) {
     // Wrap the transaction in a transaction envelope to prepare for submission.
     $envelope = $bloom->envelope->enclose($transaction);
 
-    var_dump(\StageRightLabs\PHPXDR\XDR::fresh()->write($envelope)->toBase64());
-
     // Sign the envelope with the secret key of our key pair.
     $envelope = $bloom->envelope->sign($envelope, $keyPair);
 
