@@ -11,6 +11,10 @@
         }
     ],
     "require": {
+        "php-64bit": "^8.1",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-sodium": "*",
         "stagerightlabs/bloom": "dev-main",
         "stagerightlabs/phpxdr": "^0.0.15"
     },
