@@ -60,16 +60,16 @@ IO::print(IO::color('Transfer Amount: ', IO::COLOR_BLUE) . $amount . ' XLM');
 IO::print(IO::color('Drawn from:      ', IO::COLOR_BLUE) . $account->getAddress());
 
 if (IO::confirm('Do you wish to continue?')) {
-    
+
     // We will now create the new account by funding it from the source account.
-    
+
     // First determine the maximum transaction fee we are willing to pay.
-    // We won't necessarily be charged this amount; the network will 
+    // We won't necessarily be charged this amount; the network will
     // only charge the mininmum required fee based on network traffic.
-    // 
-    // See more here: 
+    //
+    // See more here:
     // https://developers.stellar.org/docs/encyclopedia/fees-surge-pricing-fee-strategies#network-fees-on-stellar
-    // 
+    //
     // The minimum fee is the base fee (100 stroops) * the number of operations
     // in our transaction.
     $fee = 100; // 100 stroops * 1 operation
@@ -78,22 +78,22 @@ if (IO::confirm('Do you wish to continue?')) {
     $transaction = $bloom->transaction->create($account, $account->getCurrentSequenceNumber(), $fee);
 
     // Prepare a 'create account' operation for inclusion in the transaction.
-    // 
-    // It requries the public address of the account to be created and 
+    //
+    // It requires the public address of the account to be created and
     // some amount of XLM to transfer to the new account to create it.
-    // We are specifying that amount as a string here; Bloom will 
-    // automatically 'de-scale' that into a stroop value. If we 
+    // We are specifying that amount as a string here; Bloom will
+    // automatically 'de-scale' that into a stroop value. If we
     // provided an integer it would be interpreted as stroops.
-    // 
-    // We are not requied to include the source account with each 
-    // operation because it is also listed in the transaction 
+    //
+    // We are not required to include the source account with each
+    // operation because it is also listed in the transaction
     // itself. We can still specify it here if we want to.
     $createAccountOp = $bloom->operation->createAccount($destination, $amount, $account);
 
     // Add the CreateAccount operation to the transaction.
-    // 
-    // Note that all Bloom objects are immutable by default; The 
-    // transaction instance we got back is a new PHP object 
+    //
+    // Note that all Bloom objects are immutable by default; The
+    // transaction instance we got back is a new PHP object
     // that has its own separate space in memory.
     $transaction = $bloom->transaction->addOperation($transaction, $createAccountOp);
 
