@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c5b444302ef024d3c50365e6277c6f79",
+    "content-hash": "e21554ba80a855c4224b40278d49fd67",
     "packages": [
         {
             "name": "brick/math",
@@ -131,7 +131,7 @@
             "dist": {
                 "type": "path",
                 "url": "../Bloom",
-                "reference": "af93acd8ac70c6373e1e66853b10f95e0fc276ed"
+                "reference": "65b852bf374b9bf29cbbd8aad660908c96951873"
             },
             "require": {
                 "brick/math": "^0.9.3",
@@ -139,7 +139,7 @@
                 "ext-json": "*",
                 "ext-sodium": "*",
                 "myclabs/deep-copy": "^1.11",
-                "php-64bit": "^8.0",
+                "php-64bit": "^8.1",
                 "stagerightlabs/phpxdr": "^0.0.15"
             },
             "require-dev": {
@@ -250,7 +250,12 @@
     },
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php-64bit": "^8.1",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-sodium": "*"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
 }
