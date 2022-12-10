@@ -3,6 +3,7 @@
         "Friendbot",
         "keypair",
         "stroop",
-        "stroops"
+        "stroops",
+        "trustline"
     ]
 }
