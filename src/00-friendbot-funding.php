@@ -15,16 +15,16 @@ use StageRightLabs\Bloom\Horizon\Error as HorizonError;
 $bloom = Bloom::make();
 
 // Ask for an address to fund.
-$address = IO::prompt('Enter keyPair Address (or leave blank for random):');
+$address = IO::prompt('Enter address to be funded (or leave blank for random):');
 
 // If no address was provided we will generate a new one.
 if (empty($address)) {
-    $keyPair = $bloom->keyPair->generate();
-    $address = $keyPair->getAddress();
+    $keypair = $bloom->keypair->generate();
+    $address = $keypair->getAddress();
 
     IO::print("Randomly Generated keyPair:");
-    IO::print("Address: {$keyPair->getAddress()}");
-    IO::print("Seed:    {$keyPair->getSeed()}\n");
+    IO::print("Address: {$keypair->getAddress()}");
+    IO::print("Seed:    {$keypair->getSeed()}\n");
 }
 
 // Make the friendbot request
@@ -32,6 +32,7 @@ IO::print('Making Friendbot funding request...');
 $response = $bloom->friendbot->fund($address);
 
 if ($response instanceof HorizonError) {
+    $original = $response->getResponse();
     IO::error($response->getTitle() . ': ' . $response->getDetail());
     exit(1);
 }

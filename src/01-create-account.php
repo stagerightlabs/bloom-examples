@@ -54,7 +54,7 @@ if ($account->getAddress() == $destination) {
 }
 
 // Confirm the user action
-IO::info('Transaction details:');
+IO::info('Account Creation Transaction details:');
 IO::print(IO::color('New Account:     ', IO::COLOR_BLUE) . $destination);
 IO::print(IO::color('Transfer Amount: ', IO::COLOR_BLUE) . $amount . ' XLM');
 IO::print(IO::color('Drawn from:      ', IO::COLOR_BLUE) . $account->getAddress());
@@ -65,7 +65,7 @@ if (IO::confirm('Do you wish to continue?')) {
 
     // First determine the maximum transaction fee we are willing to pay.
     // We won't necessarily be charged this amount; the network will
-    // only charge the mininmum required fee based on network traffic.
+    // only charge the minimum required fee based on network traffic.
     //
     // See more here:
     // https://developers.stellar.org/docs/encyclopedia/fees-surge-pricing-fee-strategies#network-fees-on-stellar
@@ -90,7 +90,7 @@ if (IO::confirm('Do you wish to continue?')) {
     // itself. We can still specify it here if we want to.
     $createAccountOp = $bloom->operation->createAccount($destination, $amount, $account);
 
-    // Add the CreateAccount operation to the transaction.
+    // Add the create-account operation to the transaction.
     //
     // Note that all Bloom objects are immutable by default; The
     // transaction instance we got back is a new PHP object
@@ -109,7 +109,7 @@ if (IO::confirm('Do you wish to continue?')) {
     // An error response indicates that something went wrong.
     if ($response instanceof HorizonError) {
         IO::error($response->getTitle());
-
+        $result = $response->getResult();
         if ($result->getOperationResultList()->isNotEmpty()) {
             foreach ($result->getOperationResultList() as $operationResult) {
                 IO::error($operationResult->getErrorMessage());
@@ -122,7 +122,7 @@ if (IO::confirm('Do you wish to continue?')) {
     }
 
     // Otherwise we are good to go.
-    IO::success("Operation complete.");
+    IO::success("Transaction complete.");
     IO::success("https://stellar.expert/explorer/testnet/tx/{$response->getHash()}");
 } else {
     IO::error('Account creation cancelled');
