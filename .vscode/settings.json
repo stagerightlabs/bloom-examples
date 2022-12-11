@@ -4,6 +4,7 @@
         "keypair",
         "stroop",
         "stroops",
-        "trustline"
+        "trustline",
+        "trustlines"
     ]
 }
