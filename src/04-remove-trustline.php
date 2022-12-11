@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Create and fund a Stellar account.
+ * Remove a payment.
  */
 
 declare(strict_types=1);

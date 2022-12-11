@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Create and fund a Stellar account.
+ * Create a trustline.
  */
 
 declare(strict_types=1);
