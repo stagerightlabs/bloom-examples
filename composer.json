@@ -1,6 +1,6 @@
 {
     "name": "stagerightlabs/bloom-stellar-quest",
-    "description": "Stellar Quest solutions in PHP using Bloom",
+    "description": "Examples demonstrating the use of Bloom to interact with the Stellar network",
     "type": "project",
     "license": "Apache-2.0",
     "authors": [
@@ -17,6 +17,12 @@
         "ext-sodium": "*",
         "stagerightlabs/bloom": "dev-main",
         "stagerightlabs/phpxdr": "^0.0.15"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.13"
+    },
+    "scripts": {
+        "format": "php-cs-fixer fix --config=.php-cs-fixer.dist.php --allow-risky yes"
     },
     "config": {
         "optimize-autoloader": true,
