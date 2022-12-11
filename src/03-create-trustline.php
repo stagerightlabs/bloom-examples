@@ -14,9 +14,9 @@ use StageRightLabs\Bloom\Horizon\Error as HorizonError;
 // When no config is specified Bloom will default to using the test network.
 $bloom = Bloom::make();
 
-// Ask for the asset details that will make up the trustline
-$identifier = IO::prompt('What asset that will be trusted? ["Code:ISSUER"]:');
-if (!$identifier) {
+// Ask for the asset that will given a trustline.
+$identifier = IO::prompt('What is the asset that will be trusted? ["Code:ISSUER"]:');
+if (empty($identifier)) {
     IO::error('You must provide an asset to be trusted.');
     exit(1);
 }
@@ -31,7 +31,7 @@ if (empty($limit)) {
 // Without this we won't be able to sign the transaction and
 // it will be rejected when we submit it to the network.
 $seed = IO::prompt('Provide the secret key of the source account to sign the transaction:');
-if (!$seed) {
+if (empty($seed)) {
     IO::error('You must provide a source account secret key for transaction signing.');
     return exit(1);
 }
@@ -43,8 +43,6 @@ if ($account instanceof HorizonError) {
     IO::error("The source account does not appear to be valid. ({$account->getTitle()})");
     exit(1);
 }
-$account = $bloom->account->incrementSequenceNumber($account);
-$sequenceNumber = $account->getCurrentSequenceNumber();
 
 // Confirm the user action
 IO::info('Trustline Creation Transaction details:');
@@ -53,17 +51,21 @@ IO::print(IO::color('Limit:                    ', IO::COLOR_BLUE) . (is_null($li
 IO::print(IO::color('Account Adding Trustline: ', IO::COLOR_BLUE) . $account->getAddress());
 
 if (IO::confirm('Do you wish to continue?')) {
+    // Increment the account sequence number
+    $account = $bloom->account->incrementSequenceNumber($account);
+    $sequenceNumber = $account->getCurrentSequenceNumber();
+
     // Create the transaction object
     $transaction = $bloom->transaction->create($account, $account->getCurrentSequenceNumber());
 
     // Prepare a 'change trust' operation for inclusion in the transaction.
-    $paymentOp = $bloom->operation->changeTrust(
+    $changeTrustOp = $bloom->operation->changeTrust(
         line: $bloom->asset->fromString($identifier),
         limit: $limit
     );
 
     // Add the payment operation to the transaction.
-    $transaction = $bloom->transaction->addOperation($transaction, $paymentOp);
+    $transaction = $bloom->transaction->addOperation($transaction, $changeTrustOp);
 
     // Wrap the transaction in a transaction envelope to prepare for submission.
     $envelope = $bloom->envelope->enclose($transaction);
@@ -95,3 +97,5 @@ if (IO::confirm('Do you wish to continue?')) {
 } else {
     IO::error('Trustline creation cancelled');
 }
+
+exit(0);

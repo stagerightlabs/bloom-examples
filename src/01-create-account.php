@@ -16,14 +16,14 @@ $bloom = Bloom::make();
 
 // Ask for the destination address
 $destination = IO::prompt('Provide an address for the account to be created:');
-if (!$destination) {
+if (empty($destination)) {
     IO::error('You must provide a destination address.');
     exit(1);
 }
 
 // Ask for the amount of XLM to send to the new account
 $amount = IO::prompt('How much XLM should be sent to the new account?');
-if (!$amount) {
+if (empty($amount)) {
     IO::error('You must provide a transfer amount.');
     return exit(1);
 }
@@ -32,7 +32,7 @@ if (!$amount) {
 // Without this we won't be able to sign the transaction and
 // it will be rejected when we submit it to the network.
 $seed = IO::prompt('Provide the secret key of the source account to sign the transaction:');
-if (!$seed) {
+if (empty($seed)) {
     IO::error('You must provide a source account secret key for transaction signing.');
     return exit(1);
 }
@@ -44,8 +44,6 @@ if ($account instanceof HorizonError) {
     IO::error("The source account does not appear to be valid. ({$account->getTitle()})");
     exit(1);
 }
-$account = $bloom->account->incrementSequenceNumber($account);
-$sequenceNumber = $account->getCurrentSequenceNumber();
 
 // Ensure the source and destination accounts are not the same:
 if ($account->getAddress() == $destination) {
@@ -60,6 +58,9 @@ IO::print(IO::color('Transfer Amount: ', IO::COLOR_BLUE) . $amount . ' XLM');
 IO::print(IO::color('Drawn from:      ', IO::COLOR_BLUE) . $account->getAddress());
 
 if (IO::confirm('Do you wish to continue?')) {
+    // Increment the account sequence number
+    $account = $bloom->account->incrementSequenceNumber($account);
+    $sequenceNumber = $account->getCurrentSequenceNumber();
 
     // We will now create the new account by funding it from the source account.
 
