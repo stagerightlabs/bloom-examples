@@ -15,6 +15,7 @@ Bloom is still a work in progress; more examples will be uploaded as new functio
 - [Verify Trustline](src/05-verify-trustline.php)
 - [Manage Buy Offer](src/06-manage-buy-offer.php)
 - [Manage Sell Offer](src/07-manage-sell-offer.php)
+- [Create Passive Sell Offer](src/08-create-passive-sell-offer.php)
 
 ## Roadmap
 
