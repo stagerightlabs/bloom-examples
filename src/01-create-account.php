@@ -60,7 +60,6 @@ IO::print(IO::color('Drawn from:      ', IO::COLOR_BLUE) . $account->getAddress(
 if (IO::confirm('Do you wish to continue?')) {
     // Increment the account sequence number
     $account = $bloom->account->incrementSequenceNumber($account);
-    $sequenceNumber = $account->getCurrentSequenceNumber();
 
     // We will now create the new account by funding it from the source account.
 

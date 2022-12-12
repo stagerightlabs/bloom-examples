@@ -64,7 +64,6 @@ if (IO::confirm('Do you wish to continue?')) {
 
     // Increment the account sequence number
     $account = $bloom->account->incrementSequenceNumber($account);
-    $sequenceNumber = $account->getCurrentSequenceNumber();
 
     // Create the transaction object
     $transaction = $bloom->transaction->create($account, $account->getCurrentSequenceNumber());
