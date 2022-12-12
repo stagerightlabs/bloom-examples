@@ -12,7 +12,7 @@ use StageRightLabs\Bloom\Bloom;
 use StageRightLabs\Bloom\Horizon\Error as HorizonError;
 
 // When no config is specified Bloom will default to using the test network.
-$bloom = Bloom::make(['debug' => true]);
+$bloom = Bloom::make();
 
 // Ask for the asset details that will make up the offer
 IO::print("To submit a manage-buy-offer:");
