@@ -64,7 +64,7 @@ if (!$account->getBalanceForAsset($buyingAsset)) {
 }
 
 // Confirm the user action
-IO::info('Manage Buy offer Transaction details:');
+IO::info('Manage Sell offer Transaction details:');
 IO::print(IO::color('Asset to be sold:      ', IO::COLOR_BLUE) . $sellingAsset->getCanonicalName());
 IO::print(IO::color('Asset to be purchased: ', IO::COLOR_BLUE) . $buyingAsset->getCanonicalName());
 IO::print(IO::color('Price:                 ', IO::COLOR_BLUE) . $price . $buyingAsset->getAssetCode() . '/1' . $sellingAsset->getAssetCode());
@@ -78,7 +78,7 @@ if (IO::confirm('Do you wish to continue?')) {
     $transaction = $bloom->transaction->create($account, $account->getCurrentSequenceNumber());
 
     // Prepare a 'manage sell offer' operation for inclusion in the transaction.
-    $manageBuyOfferOp = $bloom->operation->manageSellOffer(
+    $manageSellOfferOp = $bloom->operation->manageSellOffer(
         sellingAsset: $sellingAsset,
         sellingAmount: $sellAmount,
         buyingAsset: $buyingAsset,
@@ -86,7 +86,7 @@ if (IO::confirm('Do you wish to continue?')) {
     );
 
     // Add the payment operation to the transaction.
-    $transaction = $bloom->transaction->addOperation($transaction, $manageBuyOfferOp);
+    $transaction = $bloom->transaction->addOperation($transaction, $manageSellOfferOp);
 
     // Wrap the transaction in a transaction envelope to prepare for submission.
     $envelope = $bloom->envelope->enclose($transaction);
