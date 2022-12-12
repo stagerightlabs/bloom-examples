@@ -17,3 +17,4 @@ Bloom is still a work in progress; more examples will be uploaded as new functio
 - [Manage Sell Offer](src/08-manage-sell-offer.php)
 - [Create Passive Sell Offer](src/09-create-passive-sell-offer.php)
 - [Path Payment Strict Send](src/10-path-payment-strict-send.php)
+- [Path Payment Strict Receive](src/11-path-payment-strict-receive.php)
