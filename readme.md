@@ -13,6 +13,7 @@ Bloom is still a work in progress; more examples will be uploaded as new functio
 - [Create Trustline](src/04-create-trustline.php)
 - [Remove Trustline](src/05-remove-trustline.php)
 - [Verify Trustline](src/06-verify-trustline.php)
+- [Issue an Asset](src/07-issue-asset.php)
 - [Manage Buy Offer](src/08-manage-buy-offer.php)
 - [Manage Sell Offer](src/09-manage-sell-offer.php)
 - [Create Passive Sell Offer](src/10-create-passive-sell-offer.php)
