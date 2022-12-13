@@ -10,6 +10,7 @@ Bloom is still a work in progress; more examples will be uploaded as new functio
 - [Friendbot Funding](src/00-friendbot-funding.php)
 - [Create Account](src/01-create-account.php)
 - [Send XLM Payment](src/02-send-xlm-payment.php)
+- [External Signing](src/03-external-signing.php)
 - [Create Trustline](src/04-create-trustline.php)
 - [Remove Trustline](src/05-remove-trustline.php)
 - [Verify Trustline](src/06-verify-trustline.php)
