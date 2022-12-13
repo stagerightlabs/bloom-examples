@@ -20,3 +20,4 @@ Bloom is still a work in progress; more examples will be uploaded as new functio
 - [Create Passive Sell Offer](src/10-create-passive-sell-offer.php)
 - [Path Payment Strict Send](src/11-path-payment-strict-send.php)
 - [Path Payment Strict Receive](src/12-path-payment-strict-receive.php)
+- [Account Merge](src/13-merge-account.php)
