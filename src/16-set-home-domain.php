@@ -32,11 +32,7 @@ if ($account instanceof HorizonError) {
 }
 
 // Prompt the user for the value of the data entry
-$homeDomain = IO::prompt("What should the new home domain be?");
-if (empty($homeDomain)) {
-    IO::error('You must provide a home domain.');
-    exit(1);
-}
+$homeDomain = IO::prompt("What should the new home domain be? Leave blank for removal.");
 if (strlen($homeDomain) > 32) {
     IO::error('The data value cannot be longer than 32 characters');
     exit(1);
@@ -45,7 +41,7 @@ if (strlen($homeDomain) > 32) {
 // Confirm the user action
 IO::info('Set options (home domain) details:');
 IO::print(IO::color('Account:     ', IO::COLOR_BLUE) . $account->getAddress());
-IO::print(IO::color('Home domain: ', IO::COLOR_BLUE) . (is_null($homeDomain) ? '[REMOVE]' : $homeDomain));
+IO::print(IO::color('Home domain: ', IO::COLOR_BLUE) . (empty($homeDomain) ? '[REMOVE]' : $homeDomain));
 
 if (IO::confirm('Do you wish to continue?')) {
 
