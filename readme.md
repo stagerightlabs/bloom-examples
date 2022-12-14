@@ -22,3 +22,4 @@ Bloom is still a work in progress; more examples will be uploaded as new functio
 - [Path Payment Strict Receive](src/13-path-payment-strict-receive.php)
 - [Account Merge](src/14-merge-account.php)
 - [Manage Data](src/15-manage-data.php)
+- [Set Options: Home Domain](src/16-set-options-home-domain.php)
