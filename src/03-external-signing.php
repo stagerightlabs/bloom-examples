@@ -9,9 +9,7 @@ require __DIR__ . '/../vendor/autoload.php';
 include_once '_io.php';
 
 use StageRightLabs\Bloom\Bloom;
-use StageRightLabs\Bloom\Envelope\TransactionEnvelope;
 use StageRightLabs\Bloom\Horizon\Error as HorizonError;
-use StageRightLabs\PhpXdr\XDR;
 
 // When no config is specified Bloom will default to using the test network.
 $bloom = Bloom::make();
@@ -91,14 +89,14 @@ if (IO::confirm('Do you wish to continue?')) {
     // Ask the user to sign the transaction envelope with a third party tool.
     IO::info('Transaction Envelope:');
     IO::print(' ');
-    IO::print(XDR::fresh()->write($envelope)->toBase64());
+    IO::print($bloom->envelope->toXdr($envelope));
     IO::print(' ');
     IO::info('Sign this payload with a third party tool, such as https://laboratory.stellar.org/#txsigner?network=test');
 
     // Request the signed payload from the user
     $xdr = IO::prompt('Enter the signed payload to proceed:');
     try {
-        $envelope = XDR::fromBase64($xdr)->read(TransactionEnvelope::class);
+        $envelope = $bloom->envelope->fromXdr($xdr);
     } catch (\Throwable $th) {
         IO::error('The returned payload is malformed and cannot be submitted.');
         exit(1);
