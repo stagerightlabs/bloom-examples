@@ -70,7 +70,7 @@ if (IO::confirm('Do you wish to continue?')) {
 
     // Set the expiration time for the transaction. If no expiration time
     // is provided Bloom will default to a 1 hour validity window.
-    $transaction = $bloom->transaction->setExpiration($transaction, $seconds);
+    $transaction = $bloom->transaction->setTimeout($transaction, $seconds);
 
     // Prepare a 'payment' operation for inclusion in the transaction.
     $paymentOp = $bloom->operation->payment(
