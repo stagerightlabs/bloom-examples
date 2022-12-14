@@ -51,7 +51,7 @@ if (IO::confirm('Do you wish to continue?')) {
     // Create the transaction object
     $transaction = $bloom->transaction->create($account, $account->getCurrentSequenceNumber());
 
-    // Prepare an 'account merge' operation
+    // Prepare a 'set options' operation
     $setOptions = $bloom->operation->setOptions(
         homeDomain: $homeDomain,
     );

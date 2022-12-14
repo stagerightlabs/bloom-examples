@@ -73,7 +73,7 @@ if (IO::confirm('Do you wish to continue?')) {
     // Create the transaction object
     $transaction = $bloom->transaction->create($account, $account->getCurrentSequenceNumber());
 
-    // Prepare an 'account merge' operation
+    // Prepare a 'manage data' operation
     $manageDataOp = $bloom->operation->manageData(
         name: $name,
         value: $value,
