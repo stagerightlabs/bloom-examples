@@ -28,7 +28,7 @@ if (strlen($assetCode) > 12) {
 
 $limit = IO::prompt('How much of the new asset should be issued? Leave blank for the max amount.');
 if (empty($limit)) {
-    $limit = Int64::max();
+    $limit = $bloom->asset->maximumAmount();
 }
 
 // Ask the user to provide the signing key for the distribution account.
