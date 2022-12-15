@@ -24,3 +24,5 @@ Bloom is still a work in progress; more examples will be uploaded as new functio
 - [Account Merge](src/14-merge-account.php)
 - [Manage Data](src/15-manage-data.php)
 - [Home Domain](src/16-set-home-domain.php)
+- [Add Signer](src/17-add-signer.php)
+- [Remove Signer](src/18-remove-signer.php)
