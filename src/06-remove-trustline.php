@@ -19,7 +19,7 @@ $bloom = Bloom::make();
 $seed = IO::prompt('Provide the secret key of the source account:');
 if (empty($seed)) {
     IO::error('You must provide a secret key.');
-    return exit(1);
+    exit(1);
 }
 
 // Load the details of the source account from horizon
@@ -50,9 +50,9 @@ if (!empty($trustlines)) {
 }
 
 $indexToBeRemoved = IO::prompt('Which trustline should be removed?');
-if (empty($indexToBeRemoved)) {
+if ($indexToBeRemoved === '') {
     IO::error('You must specify a trustline to remove.');
-    return exit(1);
+    exit(1);
 }
 
 // Confirm the user action
