@@ -26,3 +26,4 @@ Bloom is still a work in progress; more examples will be uploaded as new functio
 - [Home Domain](src/16-set-home-domain.php)
 - [Add Signer](src/17-add-signer.php)
 - [Remove Signer](src/18-remove-signer.php)
+- [Set Trustline Flags](src/19-set-trustline-flags.php)
