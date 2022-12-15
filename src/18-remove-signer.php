@@ -33,9 +33,10 @@ if ($account instanceof HorizonError) {
     exit(1);
 }
 
+// Retrieve the value of the "high" operation threshold for this account
 $highThresholdTarget = $account->getHighThreshold()->toNativeInt();
 
-
+// Prepare to display the list of signers attached to this account
 $accountSigners = array_map(function ($signerResource) {
     return [
         'address' => $signerResource->getKey(),
@@ -43,31 +44,32 @@ $accountSigners = array_map(function ($signerResource) {
     ];
 }, $account->getSigners());
 
+// We won't allow the transaction to proceed if there is only one signer
 if (count($accountSigners) == 1) {
     IO::error("Account {$account->getAddress()} has only one signer.");
     exit(1);
 }
 
+// Ask the user to choose which signer should be removed
 IO::info('Select the signer to remove:');
 foreach ($accountSigners as $idx => $s) {
     IO::print("{$idx}. {$s['address']} - Weight {$s['weight']}");
 }
-
 $indexToBeRemoved = IO::prompt('Which signer should be removed?');
 if ($indexToBeRemoved === '') {
     IO::error('You must specify a signer from the list.');
     exit(1);
 }
-
 $signerToBeRemoved = $bloom->keypair->fromAddress($accountSigners[$indexToBeRemoved]['address']);
 
+// We won't proceed if the user has selected the master key
 if ($signerToBeRemoved->getAddress() == $account->getAddress()) {
     IO::error("You probably don't want to remove the master signer");
     exit(1);
 }
 
 // Confirm the user action
-IO::info('Add signer details:');
+IO::info('Remove signer details:');
 IO::print(IO::color('Account:          ', IO::COLOR_BLUE) . $account->getAddress());
 IO::print(IO::color('Signer to Remove: ', IO::COLOR_BLUE) . $signerToBeRemoved->getAddress());
 
@@ -94,12 +96,12 @@ if (IO::confirm('Do you wish to continue?')) {
     $transaction = $bloom->transaction->create($account, $account->getCurrentSequenceNumber());
 
     // Prepare a 'set options' operation
-    $setOptions = $bloom->operation->setOptions(
+    $setOptionsOp = $bloom->operation->setOptions(
         signer: $signerToBeRemoved->getWeightedSigner(0),
     );
 
-    // Add the payment operation to the transaction.
-    $transaction = $bloom->transaction->addOperation($transaction, $setOptions);
+    // Add the operation to the transaction.
+    $transaction = $bloom->transaction->addOperation($transaction, $setOptionsOp);
 
     // Wrap the transaction in a transaction envelope to prepare for submission.
     $envelope = $bloom->envelope->enclose($transaction);

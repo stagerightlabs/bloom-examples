@@ -21,16 +21,15 @@ if (empty($destination)) {
     exit(1);
 }
 
-// Ask the user to provide the signing key for the source account.
-$seed = IO::prompt('Provide the secret key of the source account that will be merged:');
-if (empty($seed)) {
-    IO::error('You must provide a source account secret key for transaction signing.');
+// Ask the user to provide the address of the source account
+$address = IO::prompt('Provide the address of the account that will be merged:');
+if (empty($address)) {
+    IO::error('You must provide a source account address.');
     return exit(1);
 }
 
 // Load the details of the source account from horizon
-$keyPair = $bloom->keypair->fromSeed($seed);
-$account = $bloom->account->retrieve($keyPair);
+$account = $bloom->account->retrieve($address);
 if ($account instanceof HorizonError) {
     IO::error("The source account does not appear to be valid. ({$account->getTitle()})");
     exit(1);
@@ -49,6 +48,14 @@ IO::print(IO::color('Merged Account: ', IO::COLOR_BLUE) . $account->getAddress()
 
 if (IO::confirm('Do you wish to continue?')) {
 
+    // Ask the user to provide the signing key for the source account.
+    $seed = IO::prompt("Provide the secret key for source account {$account->getAddress()}:");
+    if (empty($seed)) {
+        IO::error('You must provide a source account secret key for transaction signing.');
+        return exit(1);
+    }
+    $keypair = $bloom->keypair->fromSeed($seed);
+
     // Increment the account sequence number
     $account = $bloom->account->incrementSequenceNumber($account);
 
@@ -60,14 +67,14 @@ if (IO::confirm('Do you wish to continue?')) {
         destination: $destination,
     );
 
-    // Add the payment operation to the transaction.
+    // Add the operation to the transaction.
     $transaction = $bloom->transaction->addOperation($transaction, $accountMergeOp);
 
     // Wrap the transaction in a transaction envelope to prepare for submission.
     $envelope = $bloom->envelope->enclose($transaction);
 
     // Sign the envelope with the secret key of our key pair.
-    $envelope = $bloom->envelope->sign($envelope, $keyPair);
+    $envelope = $bloom->envelope->sign($envelope, $keypair);
 
     // Submit the transaction envelope to Horizon
     $response = $bloom->envelope->post($envelope);

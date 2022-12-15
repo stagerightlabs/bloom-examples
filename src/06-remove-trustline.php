@@ -14,17 +14,15 @@ use StageRightLabs\Bloom\Horizon\Error as HorizonError;
 // When no config is specified Bloom will default to using the test network.
 $bloom = Bloom::make();
 
-// Ask the user to provide the signing key for the source account.
-// We will use this to fetch balance details for the account.
-$seed = IO::prompt('Provide the secret key of the source account:');
-if (empty($seed)) {
-    IO::error('You must provide a secret key.');
-    exit(1);
+// Ask the user to provide the address of the source account
+$address = IO::prompt('Provide the address of the source account:');
+if (empty($address)) {
+    IO::error('You must provide a source account address.');
+    return exit(1);
 }
 
 // Load the details of the source account from horizon
-$keyPair = $bloom->keypair->fromSeed($seed);
-$account = $bloom->account->retrieve($keyPair);
+$account = $bloom->account->retrieve($address);
 if ($account instanceof HorizonError) {
     IO::error("The source account does not appear to be valid. ({$account->getTitle()})");
     exit(1);
@@ -62,6 +60,14 @@ IO::print(IO::color('Account Removing Trustline: ', IO::COLOR_BLUE) . $account->
 
 if (IO::confirm('Do you wish to continue?')) {
 
+    // Ask the user to provide the signing key for the source account.
+    $seed = IO::prompt("Provide the secret key for source account {$account->getAddress()}:");
+    if (empty($seed)) {
+        IO::error('You must provide a source account secret key for transaction signing.');
+        return exit(1);
+    }
+    $keypair = $bloom->keypair->fromSeed($seed);
+
     // Increment the account sequence number
     $account = $bloom->account->incrementSequenceNumber($account);
 
@@ -74,14 +80,14 @@ if (IO::confirm('Do you wish to continue?')) {
         limit: 0
     );
 
-    // Add the payment operation to the transaction.
+    // Add the operation to the transaction.
     $transaction = $bloom->transaction->addOperation($transaction, $changeTrustOp);
 
     // Wrap the transaction in a transaction envelope to prepare for submission.
     $envelope = $bloom->envelope->enclose($transaction);
 
     // Sign the envelope with the secret key of our key pair.
-    $envelope = $bloom->envelope->sign($envelope, $keyPair);
+    $envelope = $bloom->envelope->sign($envelope, $keypair);
 
     // Submit the transaction envelope to Horizon
     $response = $bloom->envelope->post($envelope);

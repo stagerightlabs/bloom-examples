@@ -22,7 +22,7 @@ $bloom = Bloom::make();
 // it will be rejected when we submit it to the network.
 $address = IO::prompt('Provide the address of the account to manage:');
 if (empty($address)) {
-    IO::error('You must provide a source account secret key for transaction signing.');
+    IO::error('You must provide a source account address.');
     return exit(1);
 }
 
@@ -68,12 +68,12 @@ if (IO::confirm('Do you wish to continue?')) {
     $transaction = $bloom->transaction->create($account, $account->getCurrentSequenceNumber());
 
     // Prepare a 'set options' operation
-    $setOptions = $bloom->operation->setOptions(
+    $setOptionsOp = $bloom->operation->setOptions(
         signer: $newSigner->getWeightedSigner($weight),
     );
 
-    // Add the payment operation to the transaction.
-    $transaction = $bloom->transaction->addOperation($transaction, $setOptions);
+    // Add the operation to the transaction.
+    $transaction = $bloom->transaction->addOperation($transaction, $setOptionsOp);
 
     // Wrap the transaction in a transaction envelope to prepare for submission.
     $envelope = $bloom->envelope->enclose($transaction);

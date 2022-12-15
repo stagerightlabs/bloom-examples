@@ -45,8 +45,7 @@ if (empty($address)) {
 }
 
 // Load the details of the source account from horizon
-$keyPair = $bloom->keypair->fromAddress($address);
-$account = $bloom->account->retrieve($keyPair);
+$account = $bloom->account->retrieve($address);
 if ($account instanceof HorizonError) {
     IO::error("The source account does not appear to be valid. ({$account->getTitle()})");
     exit(1);

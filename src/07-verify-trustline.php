@@ -14,7 +14,7 @@ use StageRightLabs\Bloom\Horizon\Error as HorizonError;
 // When no config is specified Bloom will default to using the test network.
 $bloom = Bloom::make();
 
-// Ask the user to provide the address of the account to be checked
+// Ask the user to provide an address
 $address = IO::prompt('Please provide an address for the account to be checked:');
 if (empty($address)) {
     IO::error('You must provide a secret key.');
@@ -25,8 +25,8 @@ if (empty($address)) {
 $identifier = IO::prompt('What asset are you looking for? ["Code:ISSUER"]:');
 
 // Load the details of the source account from horizon
-$keyPair = $bloom->keypair->fromAddress($address);
-$account = $bloom->account->retrieve($keyPair);
+$keypair = $bloom->keypair->fromAddress($address);
+$account = $bloom->account->retrieve($keypair);
 if ($account instanceof HorizonError) {
     IO::error("The source account does not appear to be valid. ({$account->getTitle()})");
     exit(1);
