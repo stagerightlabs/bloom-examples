@@ -28,3 +28,4 @@ Bloom is still a work in progress; more examples will be uploaded as new functio
 - [Remove Signer](src/18-remove-signer.php)
 - [Set Trustline Flags](src/19-set-trustline-flags.php)
 - [Bump Sequence](src/20-bump-sequence.php)
+- [Sponsoring Reserves](src/21-sponsoring-reserves.php)
