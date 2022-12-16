@@ -23,8 +23,8 @@ if (empty($address)) {
     $address = $keypair->getAddress();
 
     IO::info("Randomly generated keypair:");
-    IO::print(IO::color("Address: ", IO::COLOR_BLUE) . " {$keypair->getAddress()}");
-    IO::print(IO::color("Seed:    ", IO::COLOR_BLUE) . " {$keypair->getSeed()}\n");
+    IO::print(IO::color("Address: ", IO::COLOR_BLUE) . "{$keypair->getAddress()}");
+    IO::print(IO::color("Seed:    ", IO::COLOR_BLUE) . "{$keypair->getSeed()}\n");
 }
 
 // Make the friendbot request
