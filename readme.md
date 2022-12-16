@@ -27,3 +27,4 @@ Bloom is still a work in progress; more examples will be uploaded as new functio
 - [Add Signer](src/17-add-signer.php)
 - [Remove Signer](src/18-remove-signer.php)
 - [Set Trustline Flags](src/19-set-trustline-flags.php)
+- [Bump Sequence](src/20-bump-sequence.php)
