@@ -29,3 +29,5 @@ Bloom is still a work in progress; more examples will be uploaded as new functio
 - [Set Trustline Flags](src/19-set-trustline-flags.php)
 - [Bump Sequence](src/20-bump-sequence.php)
 - [Sponsoring Reserves](src/21-sponsoring-reserves.php)
+- [Create Claimable Balance](src/22-create-claimable-balance.php)
+- [Claim Claimable Balance](src/23-claim-claimable-balance.php)
