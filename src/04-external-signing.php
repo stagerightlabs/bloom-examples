@@ -32,7 +32,7 @@ $asset = $bloom->asset->fromString($identifier);
 $amount = IO::prompt("How much {$asset->getAssetCode()} should be sent?");
 if (empty($amount)) {
     IO::error('You must provide a transfer amount.');
-    return exit(1);
+    exit(1);
 }
 
 // Ask the user to provide the signing key for the source account.
@@ -41,7 +41,7 @@ if (empty($amount)) {
 $address = IO::prompt('Provide the address of the source account:');
 if (empty($address)) {
     IO::error('You must provide a source account address.');
-    return exit(1);
+    exit(1);
 }
 
 // Load the details of the source account from horizon

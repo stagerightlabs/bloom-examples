@@ -18,7 +18,7 @@ $bloom = Bloom::make();
 $sponsorAddress = IO::prompt('Provide the address of the sponsoring account:');
 if (empty($sponsorAddress)) {
     IO::error('You must provide a source account address.');
-    return exit(1);
+    exit(1);
 }
 
 // Load the details of the source account from horizon
@@ -43,7 +43,7 @@ if (IO::confirm('Do you wish to continue?')) {
     $seed = IO::prompt("Provide the secret key for source account {$sponsorAccount->getAddress()}:");
     if (empty($seed)) {
         IO::error('You must provide a source account secret key for transaction signing.');
-        return exit(1);
+        exit(1);
     }
     $sponsorKeypair = $bloom->keypair->fromSeed($seed);
 

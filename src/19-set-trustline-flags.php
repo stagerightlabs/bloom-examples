@@ -20,7 +20,7 @@ $bloom = Bloom::make();
 $address = IO::prompt('Provide the address of the issuing account:');
 if (empty($address)) {
     IO::error('You must provide a source account address.');
-    return exit(1);
+    exit(1);
 }
 
 // Load the details of the source account from horizon
@@ -34,7 +34,7 @@ if ($account instanceof HorizonError) {
 $trustorAddress = IO::prompt('Provide the address of the trustline account to manage:');
 if (empty($trustorAddress)) {
     IO::error('You must provide a source account secret key for transaction signing.');
-    return exit(1);
+    exit(1);
 }
 
 $identifier = IO::prompt('Which trustline asset will be managed? ["Code:ISSUER"]:');
@@ -106,7 +106,7 @@ if (IO::confirm('Do you wish to continue?')) {
     $seed = IO::prompt("Provide the secret key for issuing account {$account->getAddress()}:");
     if (empty($seed)) {
         IO::error('You must provide a source account secret key for transaction signing.');
-        return exit(1);
+        exit(1);
     }
     $keypair = $bloom->keypair->fromSeed($seed);
 

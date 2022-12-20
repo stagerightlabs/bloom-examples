@@ -23,7 +23,7 @@ $bloom = Bloom::make(['debug' => true]);
 $address = IO::prompt('Provide the address of the account to manage:');
 if (empty($address)) {
     IO::error('You must provide the address of the account to manage.');
-    return exit(1);
+    exit(1);
 }
 
 // Load the details of the source account from horizon

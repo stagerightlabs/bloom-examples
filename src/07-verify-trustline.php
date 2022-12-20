@@ -18,7 +18,7 @@ $bloom = Bloom::make();
 $address = IO::prompt('Please provide an address for the account to be checked:');
 if (empty($address)) {
     IO::error('You must provide a secret key.');
-    return exit(1);
+    exit(1);
 }
 
 // Ask for the asset that will given a trustline.
