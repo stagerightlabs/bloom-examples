@@ -76,7 +76,7 @@ if (IO::confirm('Do you wish to continue?')) {
 
     // Prepare a 'change trust' operation for inclusion in the transaction.
     $changeTrustOp = $bloom->operation->changeTrust(
-        line: $bloom->asset->fromString($trustlines[$indexToBeRemoved]),
+        asset: $bloom->asset->fromString($trustlines[$indexToBeRemoved]),
         limit: 0
     );
 
