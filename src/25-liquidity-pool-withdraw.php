@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Manage account data entries with the manage data operation.
+ * Withdraw from a liquidity pool.
  */
 
 declare(strict_types=1);
