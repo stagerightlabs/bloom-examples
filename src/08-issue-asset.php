@@ -66,9 +66,10 @@ IO::print(IO::color('Distributor: ', IO::COLOR_BLUE) . $distributorKeyPair->getA
 if (IO::confirm('Do you wish to continue?')) {
     // Increment the account sequence number
     $issuer = $bloom->account->incrementSequenceNumber($issuer);
+    $issuerSequenceNumber = $issuer->getSequenceNumber();
 
     // Create the transaction object
-    $transaction = $bloom->transaction->create($issuer, $issuer->getCurrentSequenceNumber());
+    $transaction = $bloom->transaction->create($issuer, $issuerSequenceNumber);
 
     // Prepare a 'change trust' operation for inclusion in the transaction.
     $changeTrustOp = $bloom->operation->changeTrust(

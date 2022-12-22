@@ -49,9 +49,10 @@ if (IO::confirm('Do you wish to continue?')) {
 
     // Increment the account sequence number
     $sponsorAccount = $bloom->account->incrementSequenceNumber($sponsorAccount);
+    $sequenceNumber = $sponsorAccount->getSequenceNumber();
 
     // Create the transaction object
-    $transaction = $bloom->transaction->create($sponsorAccount, $sponsorAccount->getCurrentSequenceNumber());
+    $transaction = $bloom->transaction->create($sponsorAccount, $sequenceNumber);
 
     // Create a 'begin sponsoring future reserves' operation
     $beginSponsoringFutureReservesOp = $bloom->operation->beginSponsoringFutureReserves(

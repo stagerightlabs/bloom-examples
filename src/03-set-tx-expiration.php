@@ -70,9 +70,10 @@ if (IO::confirm('Do you wish to continue?')) {
 
     // Increment the account sequence number
     $account = $bloom->account->incrementSequenceNumber($account);
+    $sequenceNumber = $account->getSequenceNumber();
 
     // Create the transaction object
-    $transaction = $bloom->transaction->create($account, $account->getCurrentSequenceNumber());
+    $transaction = $bloom->transaction->create($account, $sequenceNumber);
 
     // Set the expiration time for the transaction. If no expiration time
     // is provided Bloom will default to a 1 hour validity window.

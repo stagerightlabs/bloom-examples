@@ -114,7 +114,7 @@ if (IO::confirm('Do you wish to continue?')) {
     $account = $bloom->account->incrementSequenceNumber($account);
 
     // Create the transaction object
-    $transaction = $bloom->transaction->create($account, $account->getCurrentSequenceNumber());
+    $transaction = $bloom->transaction->create($account, $account->getSequenceNumber());
 
     // Prepare a 'set trustline flags' operation
     $setTrustlineFlagsOp = $bloom->operation->setTrustLineFlags(

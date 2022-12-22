@@ -80,9 +80,10 @@ if (IO::confirm('Do you wish to continue?')) {
 
     // Increment the account sequence number
     $account = $bloom->account->incrementSequenceNumber($account);
+    $sequenceNumber = $account->getSequenceNumber();
 
     // Create the transaction object
-    $transaction = $bloom->transaction->create($account, $account->getCurrentSequenceNumber());
+    $transaction = $bloom->transaction->create($account, $sequenceNumber);
 
     // Prepare a 'manage sell offer' operation for inclusion in the transaction.
     $manageSellOfferOp = $bloom->operation->manageSellOffer(

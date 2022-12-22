@@ -68,6 +68,7 @@ if (IO::confirm('Do you wish to continue?')) {
 
     // Increment the account sequence number
     $account = $bloom->account->incrementSequenceNumber($account);
+    $sequenceNumber = $account->getSequenceNumber();
 
     // We will now create the new account by funding it from the source account.
 
@@ -83,7 +84,7 @@ if (IO::confirm('Do you wish to continue?')) {
     $fee = 100; // 100 stroops * 1 operation
 
     // Now we will create the transaction object
-    $transaction = $bloom->transaction->create($account, $account->getCurrentSequenceNumber(), $fee);
+    $transaction = $bloom->transaction->create($account, $sequenceNumber, $fee);
 
     // Prepare a 'create account' operation for inclusion in the transaction.
     //
