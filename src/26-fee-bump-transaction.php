@@ -104,7 +104,7 @@ if (IO::confirm('Do you wish to continue?')) {
     IO::success("Transaction complete.");
     IO::success("https://stellar.expert/explorer/testnet/tx/{$response->getHash()}");
 } else {
-    IO::error('Manage data transaction cancelled');
+    IO::error('Fee bump transaction cancelled');
 }
 
 exit(0);
