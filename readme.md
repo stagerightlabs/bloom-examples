@@ -2,8 +2,6 @@
 
 This repo contains example scripts that demonstrate the usage of Bloom; an unofficial Stellar SDK for PHP.
 
-Bloom is still a work in progress; more examples will be uploaded as new functionality is added.
-
 ## Table of Contents
 
 - [Keypair Generation](src/00-keypair-generation.php)
@@ -33,3 +31,4 @@ Bloom is still a work in progress; more examples will be uploaded as new functio
 - [Claim Claimable Balance](src/23-claim-claimable-balance.php)
 - [Liquidity Pool Deposit](src/24-liquidity-pool-deposit.php)
 - [Liquidity Pool Withdraw](src/25-liquidity-pool-withdraw.php)
+- [Fee Bump Transaction](src/26-fee-bump-transaction.php)
